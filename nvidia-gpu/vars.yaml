@@ -8,9 +8,9 @@ CONTAINER_TOOLKIT_REF: d9de4a09b8fd51a46207398199ecfeb3998ad49d
 LIBNVIDIA_CONTAINER_VERSION: v1.11.0
 LIBNVIDIA_CONTAINER_REF: c8f267be0bac1c654d59ad4ea5df907141149977
 # renovate: datasource=github-tags extractVersion=^go(?<version>.*)$ versioning=loose depName=golang/go
-GOLANG_VERSION: 1.17.13
+GOLANG_VERSION: 1.20rc3
 # renovate: datasource=git-tags extractVersion=^glibc-(?<version>.*)$ versioning=loose depName=https://sourceware.org/git/glibc.git
-GLIBC_VERSION: 2.36
+GLIBC_VERSION: 2.36.9000
 # renovate: datasource=docker versioning=docker depName=ubuntu
 UBUNTU_IMAGE_VERSION: 23.04
 # renovate: datasource=docker versioning=docker depName=debian
