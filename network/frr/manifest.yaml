@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: frr
+  version: "$VERSION"
+  author: Sebastian Edholm
+  description: |
+    frr
+  compatibility:
+    talos:
+      version: ">= v1.2.0"

@@ -1,0 +1,23 @@
+name: frr
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - image: "docker.io/frrouting/frr:{{ .FRR_VERSION }}"
+    to: /src
+steps:
+  - prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+  - install:
+      - |
+        mkdir -p /rootfs/usr/local/etc
+        mkdir -p /rootfs/usr/local/lib/containers/frr
+        cp -r /src/* /rootfs/usr/local/lib/containers/frr
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/frr.yaml
+    to: /rootfs/usr/local/etc/containers/

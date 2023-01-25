@@ -1,0 +1,2 @@
+VERSION: "{{ .BUILD_ARG_TAG }}"
+FRR_VERSION: "v8.4.0"
