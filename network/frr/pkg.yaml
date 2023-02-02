@@ -20,6 +20,8 @@ steps:
         # Copy the frr container
         mkdir -p /rootfs/usr/local/lib/containers/frr
         mkdir -p /rootfs/usr/local/var/run/frr
+        touch /rootfs/usr/local/var/run/watchfrr.pid
+
         cp -r /src/* /rootfs/usr/local/lib/containers/frr
 finalize:
   - from: /rootfs
