@@ -9,7 +9,7 @@ container:
         - rshared
         - rbind
         - rw
-    - destination: /var/tmp/frr
+    - destination: /usr/local/var/tmp/frr
       type: bind
       options:
         - rshared
