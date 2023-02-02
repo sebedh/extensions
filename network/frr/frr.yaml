@@ -3,12 +3,15 @@ container:
   security:
     writeableRootfs: true
     writeableSysfs: true
-  entrypoint: "/usr/lib/frr/bgpd"
-  args:
-    - "-d"
-    - "-f /etc/frr/frr.conf"
-    - "-l 100.0.1.2"
+  entrypoint: "/usr/lib/frr/docker-start"
   mounts:
+    - source: "/usr/local/etc/frr/daemons"
+      destination: "/etc/frr/daemons"
+      type: bind
+      options:
+        - rshared
+        - bind
+        - ro
     - source: "/usr/local/etc/frr/frr.conf"
       destination: "/etc/frr/frr.conf"
       type: bind

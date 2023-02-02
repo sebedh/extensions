@@ -15,11 +15,11 @@ steps:
 
         # Copy configuration file
         cp /pkg/frr.conf /rootfs/usr/local/etc/frr/frr.conf
+        cp /pkg/daemons /rootfs/usr/local/etc/frr/daemons
 
         # Copy the frr container
         mkdir -p /rootfs/usr/local/lib/containers/frr
         cp -r /src/* /rootfs/usr/local/lib/containers/frr
-        rm -rf /rootfs/usr/local/lib/containers/frr/var/tmp/frr
 finalize:
   - from: /rootfs
     to: /rootfs
