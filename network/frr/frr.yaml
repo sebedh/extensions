@@ -25,8 +25,8 @@ container:
         - rshared
         - bind
         - ro
-    - source: "/usr/local/etc/frr/frr.conf"
-      destination: "/etc/frr/frr.conf"
+    - source: "/usr/local/etc/frr/bgpd.conf"
+      destination: "/etc/frr/bgpd.conf"
       type: bind
       options:
         - rshared
