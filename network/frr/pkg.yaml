@@ -12,7 +12,6 @@ steps:
   - install:
       - |
         mkdir -p /rootfs/usr/local/etc/frr
-        mkdir -p /rootfs/usr/local/var/tmp/frr
 
         # Copy configuration file
         cp /pkg/frr.conf /rootfs/usr/local/etc/frr/frr.conf
