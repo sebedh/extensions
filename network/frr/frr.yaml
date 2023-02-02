@@ -9,13 +9,6 @@ container:
     - "-f /etc/frr/frr.conf"
     - "-l 100.0.1.2"
   mounts:
-    - source: "/usr/local/var/tmp/frr"
-      destination: "/var/tmp/frr"
-      type: bind
-      options:
-        - rshared
-        - rbind
-        - rw
     - source: "/usr/local/etc/frr/frr.conf"
       destination: "/etc/frr/frr.conf"
       type: bind
