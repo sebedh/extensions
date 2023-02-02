@@ -2,8 +2,8 @@ name: frr
 container:
   entrypoint: "/usr/lib/frr/docker-start"
   mounts:
-    - source: "/var/run/frr"
-      destination: "/var/run/frr"
+    - source: /var/run/frr
+      destination: /var/run/frr
       type: bind
       options:
         - rshared
@@ -23,4 +23,7 @@ container:
         - rshared
         - bind
         - ro
+depends:
+  - service: cri
+  - service: udevd
 restart: always
