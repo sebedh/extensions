@@ -5,6 +5,13 @@ container:
     writeableSysfs: true
   entrypoint: "/usr/lib/frr/docker-start"
   mounts:
+    - source: "/var/run/frr/watchfrr.pid"
+      destination: "/var/run/frr/watchfrr.pid"
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
     - source: "/usr/local/etc/frr/daemons"
       destination: "/etc/frr/daemons"
       type: bind
