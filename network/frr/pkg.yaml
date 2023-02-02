@@ -11,8 +11,14 @@ steps:
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
   - install:
       - |
-        mkdir -p /rootfs/usr/local/etc
-        mkdir -p /rootfs/usr/local/lib/containers/frr
+        mkdir -p /rootfs/usr/local/etc/frr
+        mkdir -p /rootfs/usr/local/var/tmp/frr
+
+        # Copy configuration file
+        cp /pkg/frr.conf /rootfs/usr/local/etc/frr/frr.conf
+
+        # Copy the frr container
+        mkdir -p /rootfs/usr/local/var/lib/containers/frr
         cp -r /src/* /rootfs/usr/local/lib/containers/frr
 finalize:
   - from: /rootfs
@@ -20,4 +26,4 @@ finalize:
   - from: /pkg/manifest.yaml
     to: /
   - from: /pkg/frr.yaml
-    to: /rootfs/usr/local/etc/containers/
+    to: /rootfs/usr/local/etc/containers/frr.yaml
