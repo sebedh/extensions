@@ -19,6 +19,7 @@ steps:
         # Copy the frr container
         mkdir -p /rootfs/usr/local/lib/containers/frr
         cp -r /src/* /rootfs/usr/local/lib/containers/frr
+        rm -rf /rootfs/usr/local/lib/containers/frr/var/tmp/frr
 finalize:
   - from: /rootfs
     to: /rootfs
