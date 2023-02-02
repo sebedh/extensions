@@ -2,12 +2,16 @@ name: frr
 container:
   entrypoint: "/usr/lib/frr/docker-start"
   mounts:
-    - source: /var/run/frr
-      destination: /var/run/frr
+    - source: /var/run/frr/
+      destination: /var/run/frr/
       type: bind
       options:
         - rshared
         - rbind
+        - rw
+    - destination: /var/tmp/frr
+      type: tmpfs
+      options:
         - rw
     - source: "/usr/local/etc/frr/daemons"
       destination: "/etc/frr/daemons"
