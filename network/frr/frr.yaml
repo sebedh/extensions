@@ -1,8 +1,5 @@
 name: frr
 container:
-  security:
-    writeableRootfs: true
-    writeableSysfs: true
   entrypoint: "/usr/lib/frr/docker-start"
   mounts:
     - source: "/var/run/frr"
