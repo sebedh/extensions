@@ -18,7 +18,7 @@ steps:
         cp /pkg/frr.conf /rootfs/usr/local/etc/frr/frr.conf
 
         # Copy the frr container
-        mkdir -p /rootfs/usr/local/var/lib/containers/frr
+        mkdir -p /rootfs/usr/local/lib/containers/frr
         cp -r /src/* /rootfs/usr/local/lib/containers/frr
 finalize:
   - from: /rootfs
