@@ -10,8 +10,10 @@ container:
         - rbind
         - rw
     - destination: /var/tmp/frr
-      type: tmpfs
+      type: bind
       options:
+        - rshared
+        - rbind
         - rw
     - source: "/usr/local/etc/frr/daemons"
       destination: "/etc/frr/daemons"
