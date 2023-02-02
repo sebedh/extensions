@@ -14,7 +14,7 @@ steps:
         mkdir -p /rootfs/usr/local/etc/frr
 
         # Copy configuration file
-        cp /pkg/frr.conf /rootfs/usr/local/etc/frr/frr.conf
+        cp /pkg/bgpd.conf /rootfs/usr/local/etc/frr/bgpd.conf
         cp /pkg/daemons /rootfs/usr/local/etc/frr/daemons
 
         # Copy the frr container
