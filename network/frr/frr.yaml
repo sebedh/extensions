@@ -1,5 +1,8 @@
 name: frr
 container:
+  security:
+    writeableRootfs: true
+    writeableSysfs: true
   entrypoint: "/usr/lib/frr/bgpd"
   args:
     - "-d"
