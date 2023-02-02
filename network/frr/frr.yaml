@@ -1,5 +1,7 @@
 name: frr
 container:
+  security:
+    writeableRootfs: true
   entrypoint: "/usr/lib/frr/docker-start"
   mounts:
     - source: /var/run/frr/
@@ -10,7 +12,7 @@ container:
         - rbind
         - rw
     - source: /usr/local/var/tmp/frr 
-      destination: /var/tmp/frr
+      destination: /var/tmp/frr/
       type: bind
       options:
         - rshared
