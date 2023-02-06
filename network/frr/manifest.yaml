@@ -1,7 +1,7 @@
 version: v1alpha1
 metadata:
   name: frr
-  version: "$VERSION"
+  version: "v$VERSION"
   author: Sebastian Edholm
   description: |
     frr
