@@ -55,7 +55,6 @@ steps:
            --disable-nhrpd \
            --disable-eigrpd \
            --disable-babeld \
-           --disable-watchfrr \
            --disable-vrrpd \
            --disable-pbrd \
            --disable-bfdd \
@@ -78,8 +77,12 @@ steps:
         export DESTDIR="$containerRoot"
         make install
         mkdir -p "$containerRoot/etc/frr"
+        mkdir -p "$containerRoot/sbin"
 
         cp /pkg/files/* "$containerRoot/etc/frr"
+        mv "$containerRoot/etc/frr/docker-start" "$containerRoot/usr/lib/frr/docker-start"
+        mv "$containerRoot/etc/frr/tini" "$containerRoot/sbin/tini"
+        chmod +x "$containerRoot/sbin/tini"
 finalize:
   - from: /rootfs
     to: /rootfs
