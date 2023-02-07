@@ -1,8 +1,7 @@
 name: frr
 container:
   entrypoint: /sbin/tini
-    - --
-    - /usr/lib/frr/docker-start
+    - "-- /usr/lib/frr/docker-start"
   mounts:
     - source: /var/run/frr/
       destination: /var/run/frr/
