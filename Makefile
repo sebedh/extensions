@@ -35,7 +35,8 @@ COMMON_ARGS += --build-arg=TAG=$(TAG)
 empty :=
 space = $(empty) $(empty)
 
-TARGETS = frr
+TARGETS = frr \
+		  nut-client
 # Temporarily disabled, as drbd-pkg fails to build with Linux 6.1
 #		drbd \
 

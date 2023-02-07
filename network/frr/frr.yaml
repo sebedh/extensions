@@ -1,21 +1,6 @@
 name: frr
 container:
-  entrypoint: /sbin/tini
-  mounts:
-    - source: /var/run/frr/
-      destination: /var/run/frr/
-      type: bind
-      options:
-        - rshared
-        - rbind
-        - rw
-    - source: /var/tmp/frr
-      destination: /var/tmp/frr/
-      type: bind
-      options:
-        - rshared
-        - rbind
-        - rw
+  entrypoint: ./tini
 depends:
   - service: cri
 restart: always
