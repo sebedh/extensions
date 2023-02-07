@@ -81,6 +81,7 @@ steps:
 
         cp /pkg/files/* "$containerRoot/etc/frr"
         mv "$containerRoot/etc/frr/docker-start" "$containerRoot/usr/lib/frr/docker-start"
+        chmod +x "$containerRoot/usr/lib/frr/docker-start"
         mv "$containerRoot/etc/frr/tini" "$containerRoot/sbin/tini"
         chmod +x "$containerRoot/sbin/tini"
 finalize:
