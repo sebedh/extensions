@@ -73,7 +73,8 @@ steps:
     install:
       - |
         containerRoot=/rootfs/usr/local/lib/containers/frr
-        mkdir -p "$containerRoot/{etc/frr,sbin}"
+        mkdir -p "$containerRoot/etc/frr"
+        mkdir -p "$containerRoot/sbin"
         export DESTDIR="$containerRoot"
         make install
 
@@ -81,7 +82,7 @@ steps:
         mv "$containerRoot/etc/frr/docker-start" "$containerRoot/usr/lib/frr/docker-start"
         chmod +x "$containerRoot/usr/lib/frr/docker-start"
         mv "$containerRoot/etc/frr/tini" "$containerRoot/tini"
-        chmod +x "$containerRoot/sbin/tini"
+        chmod +x "$containerRoot/tini"
 finalize:
   - from: /rootfs
     to: /rootfs
