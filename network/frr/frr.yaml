@@ -1,9 +1,6 @@
 name: frr
 container:
-  security:
-    writeableSysfs: true
-    writeableRootfs: true
-  entrypoint: "/usr/lib/frr/docker-start"
+  entrypoint: "/usr/lib/frr/frr"
   mounts:
     - source: /var/run/frr/
       destination: /var/run/frr/
@@ -19,21 +16,6 @@ container:
         - rshared
         - rbind
         - rw
-    - source: "/usr/local/etc/frr/daemons"
-      destination: "/etc/frr/daemons"
-      type: bind
-      options:
-        - rshared
-        - bind
-        - ro
-    - source: "/usr/local/etc/frr/bgpd.conf"
-      destination: "/etc/frr/bgpd.conf"
-      type: bind
-      options:
-        - rshared
-        - bind
-        - ro
 depends:
   - service: cri
-  - service: udevd
 restart: always

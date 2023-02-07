@@ -31,29 +31,15 @@ steps:
           squashfs-tools sudo tar texinfo xorriso xz-libs py-pip rtrlib rtrlib-dev \
           py3-sphinx elfutils elfutils-dev libyang-dev
 
-        mkdir libyang
-        wget https://github.com/CESNET/libyang/archive/v{{ .LIBYANG_VERSION }}.tar.gz -P libyang
-        cd libyang
-        tar -xzf v{{ .LIBYANG_VERSION }}.tar.gz --strip-component=1
-
-        cmake -B build \
-           -DCMAKE_BUILD_TYPE=None \
-           -DCMAKE_INSTALL_PREFIX=/usr \
-           -DCMAKE_INSTALL_LIBDIR=lib \
-           -DBUILD_SHARED_LIBS=True \
-           -DCMAKE_C_FLAGS="$CFLAGS" \
-           -DENABLE_BUILD_TESTS=ON \
-           -DCMAKE_SYSTEM_NAME=Linux \
-           -DCMAKE_HOST_SYSTEM_NAME=Linux
-
-        make -C build install
       - |
         tar -xzf frr.tar.gz --strip-component=1
-        ./bootstrap.sh
-
+        rm frr.tar.gz
       - |
         export PKG_CONFIG_PATH="/usr/lib/pkgconfig"
+        ./bootstrap.sh
         ./configure \
+           --enable-user=root \
+           --enable-group=root \
            --prefix=/usr \
            --localstatedir=/var/run/frr \
            --sbindir=/usr/lib/frr \
@@ -80,16 +66,20 @@ steps:
            --disable-irdp \
            --disable-rtadv \
            --disable-backtrace \
-           --disable-snmp \
-           --enable-user=root \
-           --enable-group=root
-        make dist
-        ls -la
-        mkdir -p /rootfs/install
-        cp -r . /rootfs/install
+           --disable-snmp
     build:
       - |
-        cp frr-8.4.2.tar.gz /rootfs
+        make -j $(nproc) all
+
+    install:
+      - |
+        containerRoot=/rootfs/usr/local/lib/containers/frr
+        mkdir -p "$containerRoot"
+        export DESTDIR="$containerRoot"
+        make install
+        mkdir -p "$containerRoot/etc/frr"
+
+        cp /pkg/files/* "$containerRoot/etc/frr"
 finalize:
   - from: /rootfs
     to: /rootfs
