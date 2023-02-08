@@ -65,9 +65,6 @@ steps:
         mv /rootfs/usr/local/lib/frr "$containerRoot/usr/local/lib/"
         mv /rootfs/usr/local/share "$containerRoot/usr/local/"
         mv /rootfs/usr/local/include "$containerRoot/usr/local/"
-        mv /etc/bash "$containerRoot/etc/"
-        mv /usr/lib "$containerRoot/usr/lib/"
-        mv /bin/bash "$containerRoot/bin/"
 
         # tini docker-start
         cp /sbin/tini "$containerRoot/sbin/"
@@ -75,6 +72,39 @@ steps:
 
         
         # cleanup
+        rm -rf /rootfs/usr/local/bin
+        rm -rf /rootfs/usr/local/etc
+        rm -rf /rootfs/usr/local/lib/frr
+        rm -rf /rootfs/usr/local/sbin
+        rm -rf /rootfs/usr/local/share
+        rm -rf /rootfs/usr/local/include
+  - sources:
+      - url: https://github.com/bminor/bash/archive/refs/tags/bash-5.1.tar.gz
+        destination: bash.tar.gz
+        sha256: 94debafc8ae597cfed3fda5c99a8311e66534f1bbb3ec86194c9ed29613fb075
+        sha512: 2234ab9e7ec61afee6e278c36207748009fbc50504d3e43506edec46fa39fb6097c819d9b84f51893f30135bdffcf2aeb7760e5f8d86b26644fe2a9ecc8c5791
+    prepare:
+      - |
+        tar -xzf bash.tar.gz --strip-component=1
+        ./configure \
+           --prefix=/usr/local \
+           --bindir=/bin
+    build:
+      - |
+        make
+    install:
+      - |
+        make install DESTDIR=/rootfs
+
+        containerRoot=/rootfs/usr/local/lib/containers/frr
+        mv /rootfs/usr/local/lib/bash "$containerRoot/usr/local/lib/"
+        mv /rootfs/usr/local/lib/pkgconfig "$containerRoot/usr/local/lib/"
+        mv /rootfs/usr/local/share/doc/bash "$containerRoot/usr/local/share/doc/"
+        mv /rootfs/usr/local/share/info "$containerRoot/usr/local/share/info"
+        mv /rootfs/usr/local/share/locale "$containerRoot/usr/local/share/locale"
+        mv /rootfs/usr/local/share/man "$containerRoot/usr/local/share/man"
+        mv /rootfs/usr/local/include/bash "$containerRoot/usr/local/include"
+
         rm -rf /rootfs/usr/local/bin
         rm -rf /rootfs/usr/local/etc
         rm -rf /rootfs/usr/local/lib/frr

@@ -11,6 +11,12 @@ container:
       options:
         - bind
         - ro
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
     # config via .machine.files
     - source: /var/etc/frr
       destination: /etc/frr
