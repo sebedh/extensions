@@ -60,7 +60,7 @@ steps:
         make install
 
         containerRoot=/rootfs/usr/local/lib/containers/frr
-        mkdir -p "$containerRoot"/{etc,sbin,bin,usr/local/include,usr/local/lib,usr/local/share}
+        mkdir -p "$containerRoot"/{etc,sbin,usr/local/bin,usr/local/include,usr/local/lib,usr/local/share}
         mv /rootfs/usr/local/lib/lib* "$containerRoot/usr/local/lib/"
         mv /rootfs/usr/local/lib/frr "$containerRoot/usr/local/lib/"
         mv /rootfs/usr/local/share "$containerRoot/usr/local/"
@@ -69,6 +69,13 @@ steps:
         # tini docker-start
         cp /sbin/tini "$containerRoot/sbin/"
         cp /pkg/files/docker-start "$containerRoot/"
+
+        # path
+        frrPath="$containerRoot/usr/local/lib/frr"
+        sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/frrcommon.sh"
+        sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/frrinit.sh"
+        sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/watchfrr.sh"
+        sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/frr"
 
         # cleanup
         rm -rf /rootfs/usr/local/bin
@@ -87,7 +94,7 @@ steps:
         tar -xzf bash.tar.gz --strip-component=1
         ./configure \
            --prefix=/usr/local \
-           --bindir=/bin
+           --bindir=/usr/local/bin
     build:
       - |
         make
@@ -103,6 +110,7 @@ steps:
         mv /rootfs/usr/local/share/locale "$containerRoot/usr/local/share/locale"
         mv /rootfs/usr/local/share/man "$containerRoot/usr/local/share/man"
         mv /rootfs/usr/local/include/bash "$containerRoot/usr/local/include"
+        cp /rootfs/usr/local/bin/bash "$containerRoot/usr/local/bin/bash"
 
         rm -rf /rootfs/usr/local/bin
         rm -rf /rootfs/usr/local/etc
