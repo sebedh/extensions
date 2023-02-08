@@ -14,5 +14,5 @@ else
         }
 fi
 
-source /usr/lib/frr/frrcommon.sh
-/usr/lib/frr/watchfrr $(daemon_list)
+source /usr/local/lib/frr/frrcommon.sh
+/usr/local/lib/frr/watchfrr $(daemon_list)
