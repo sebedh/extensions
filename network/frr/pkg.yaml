@@ -59,7 +59,7 @@ steps:
         make install
 
         containerRoot=/rootfs/usr/local/lib/containers/frr
-        mkdir -p "$containerRoot"/{etc,sbin,usr/local/bin,usr/local/include,usr/local/lib,usr/local/share}
+        mkdir -p "$containerRoot"/{etc,bin,sbin,usr/local/bin,usr/local/include,usr/local/lib,usr/local/share}
         mv /rootfs/usr/local/lib/lib* "$containerRoot/usr/local/lib/"
         mv /rootfs/usr/local/lib/frr "$containerRoot/usr/local/lib/"
         mv /rootfs/usr/local/share "$containerRoot/usr/local/"
