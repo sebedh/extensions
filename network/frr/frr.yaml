@@ -20,6 +20,13 @@ container:
         - bind
         - ro
     # config via .machine.files
+    - source: /var/run/frr
+      destination: /usr/local/var/run
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
     - source: /var/etc/frr
       destination: /usr/local/etc/frr
       type: bind
