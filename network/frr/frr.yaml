@@ -26,4 +26,8 @@ container:
         - ro
 depends:
   - service: cri
+  - network:
+    - addresses
+    - connectivity
+    - etcfiles
 restart: always
