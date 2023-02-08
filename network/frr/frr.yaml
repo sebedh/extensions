@@ -23,8 +23,8 @@ container:
       destination: /var/run/frr/bgpd.pid
       type: bind
       options:
-        - rbind
-        - rshared
+        - bind
+        - shared
         - rw
     # config via .machine.files
     - source: /var/etc/frr
