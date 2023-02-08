@@ -64,12 +64,13 @@ steps:
         chmod +x "$containerRoot/usr/local/lib/frr/docker-start"
 
         # tini
+        mkdir "$containerRoot/sbin"
         cp /sbin/tini "$containerRoot/sbin/"
 
         # cleanup
         rm -rf /rootfs/usr/local/bin
         rm -rf /rootfs/usr/local/etc
-        rm -rf /rootfs/usr/local/lib/nut
+        rm -rf /rootfs/usr/local/lib/frr
         rm -rf /rootfs/usr/local/sbin
 finalize:
   - from: /rootfs
