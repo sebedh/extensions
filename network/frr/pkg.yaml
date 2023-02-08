@@ -59,7 +59,7 @@ steps:
         make install
 
         containerRoot=/rootfs/usr/local/lib/containers/frr
-        mkdir -p "$containerRoot"/{etc,bin,sbin,usr,usr/bin,/local/bin,usr/local/include,usr/local/lib,usr/local/share}
+        mkdir -p "$containerRoot"/{etc,bin,sbin,usr/local/bin,usr/local/include,usr/local/lib,usr/local/share}
         mv /rootfs/usr/local/lib/lib* "$containerRoot/usr/local/lib/"
         mv /rootfs/usr/local/lib/frr "$containerRoot/usr/local/lib/"
         mv /rootfs/usr/local/share "$containerRoot/usr/local/"
@@ -70,9 +70,6 @@ steps:
         cp /pkg/files/docker-start "$containerRoot/"
         cp /pkg/files/group "$containerRoot/etc/"
         cp /pkg/files/passwd "$containerRoot/etc/"
-        cp /bin/sh "$containerRoot/bin/"
-        cp /bin/rm "$containerRoot/bin/"
-        cp /usr/bin/dirname "$containerRoot/usr/bin/"
 
         # path
         frrPath="$containerRoot/usr/local/lib/frr"
@@ -83,7 +80,7 @@ steps:
 
         mkdir -p "$containerRoot/var/tmp/frr"
         mkdir -p "$containerRoot/var/run/frr"
-        touch "$containerRoot/var/run/frr/{staticd,bgpd,zebra}.pid"
+        touch "$containerRoot/var/run/frr/zebra.pid"
         chown -R 101:123 "$containerRoot/var/tmp/frr"
         chown -R 101:123 "$containerRoot/var/run/frr"
   - sources:
@@ -129,9 +126,12 @@ steps:
         mv /usr/include/readline "$containerRoot/usr/local/include/"
         cp /rootfs/usr/local/bin/bash "$containerRoot/usr/local/bin/bash"
 
-        mkdir "$containerRoot/usr/bin"
+        mkdir -p "$containerRoot/usr/bin/"
         cp /usr/bin/install "$containerRoot/usr/bin/"
         cp /bin/grep "$containerRoot/usr/bin/"
+        cp /bin/sh "$containerRoot/bin/"
+        cp /bin/rm "$containerRoot/bin/"
+        cp /usr/bin/dirname "$containerRoot/usr/bin/"
 
         rm -rf /rootfs/usr/local/bin
         rm -rf /rootfs/usr/local/etc
