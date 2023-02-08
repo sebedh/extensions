@@ -1,6 +1,9 @@
 name: frr
 container:
   entrypoint: ./tini
+  args:
+    - --
+    - /usr/lib/frr/docker-start
 depends:
   - service: cri
 restart: always
