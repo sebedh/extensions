@@ -77,13 +77,6 @@ steps:
         sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/watchfrr.sh"
         sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/frr"
 
-        # cleanup
-        rm -rf /rootfs/usr/local/bin
-        rm -rf /rootfs/usr/local/etc
-        rm -rf /rootfs/usr/local/lib/frr
-        rm -rf /rootfs/usr/local/sbin
-        rm -rf /rootfs/usr/local/share
-        rm -rf /rootfs/usr/local/include
   - sources:
       - url: https://github.com/bminor/bash/archive/refs/tags/bash-5.1.tar.gz
         destination: bash.tar.gz
@@ -93,6 +86,8 @@ steps:
       - |
         tar -xzf bash.tar.gz --strip-component=1
         ./configure \
+           --libdir=/usr/local/lib \
+           --includedir=/usr/local/include \
            --prefix=/usr/local \
            --bindir=/usr/local/bin
     build:
