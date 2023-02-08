@@ -24,9 +24,10 @@ steps:
            --enable-user=root \
            --enable-group=root \
            --prefix=/usr/local \
+           --sysconfdir=/usr/local/etc/frr \
            --localstatedir=/var/run/frr \
            --sbindir=/usr/local/lib/frr \
-           --sysconfdir=/usr/local/etc/frr \
+           --with-yangmodelsdir=/usr/local/share/yang \
            --disable-doc \
            --disable-pimd \
            --disable-zebra \
@@ -64,10 +65,6 @@ steps:
         mv /rootfs/usr/local/lib/frr "$containerRoot/usr/local/lib/"
         mv /rootfs/usr/local/share "$containerRoot/usr/local/"
         mv /rootfs/usr/local/include "$containerRoot/usr/local/"
-
-        # docker start
-        cp /pkg/files/docker-start "$containerRoot/"
-        chmod +x "$containerRoot/docker-start"
 
         # tini
         cp /sbin/tini "$containerRoot/sbin/"
