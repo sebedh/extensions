@@ -4,6 +4,26 @@ container:
   args:
     - --
     - /usr/lib/frr/docker-start
+  mounts:
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # config via .machine.files
+    - source: /var/etc/frr
+      destination: /etc/frr
+      type: bind
+      options:
+        - bind
+        - ro
 depends:
   - service: cri
 restart: always
