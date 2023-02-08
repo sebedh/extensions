@@ -78,7 +78,10 @@ steps:
         sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/watchfrr.sh"
         sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/frr"
 
-        mkdir "$containerRoot/var/tmp"
+        mkdir -p "$containerRoot/var/tmp/frr"
+        mkdir -p "$containerRoot/var/run/frr"
+        chown -R 101:123 "$containerRoot/var/tmp/frr"
+        chown -R 101:123 "$containerRoot/var/run/frr"
   - sources:
       - url: https://github.com/bminor/bash/archive/refs/tags/bash-5.1.tar.gz
         destination: bash.tar.gz
