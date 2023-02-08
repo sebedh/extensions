@@ -30,7 +30,6 @@ steps:
            --with-yangmodelsdir=/usr/local/share/yang \
            --disable-doc \
            --disable-pimd \
-           --disable-zebra \
            --disable-ripd \
            --disable-ripngd \
            --disable-ospfd \
@@ -78,6 +77,8 @@ steps:
         sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/frrinit.sh"
         sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/watchfrr.sh"
         sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/frr"
+
+        mkdir "$containerRoot/var/tmp"
   - sources:
       - url: https://github.com/bminor/bash/archive/refs/tags/bash-5.1.tar.gz
         destination: bash.tar.gz
@@ -123,6 +124,7 @@ steps:
 
         mkdir "$containerRoot/usr/bin"
         cp /usr/bin/install "$containerRoot/usr/bin/"
+        cp /bin/grep "$containerRoot/usr/bin/"
 
         rm -rf /rootfs/usr/local/bin
         rm -rf /rootfs/usr/local/etc
