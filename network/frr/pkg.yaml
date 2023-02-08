@@ -55,23 +55,30 @@ steps:
 
     install:
       - |
-        containerRoot=/rootfs/usr/local/lib/containers/frr
-        export DESTDIR="$containerRoot"
+        export DESTDIR=/rootfs
         make install
+
+        containerRoot=/rootfs/usr/local/lib/containers/frr
+        mkdir -p "$containerRoot"/{sbin,usr/local/include,usr/local/lib,usr/local/share}
+        mv /rootfs/usr/local/lib/lib* "$containerRoot/usr/local/lib/"
+        mv /rootfs/usr/local/lib/frr* "$containerRoot/usr/local/lib/"
+        mv /rootfs/usr/local/share "$containerRoot/usr/local/"
+        mv /rootfs/usr/local/include "$containerRoot/usr/local/"
 
         # docker start
         cp /pkg/files/docker-start "$containerRoot/usr/local/lib/frr/"
-        chmod +x "$containerRoot/usr/local/lib/frr/docker-start"
 
         # tini
-        mkdir "$containerRoot/sbin"
         cp /sbin/tini "$containerRoot/sbin/"
-
+        
         # cleanup
         rm -rf /rootfs/usr/local/bin
         rm -rf /rootfs/usr/local/etc
         rm -rf /rootfs/usr/local/lib/frr
         rm -rf /rootfs/usr/local/sbin
+        rm -rf /rootfs/usr/local/share
+        rm -rf /rootfs/usr/local/include
+
 finalize:
   - from: /rootfs
     to: /rootfs
