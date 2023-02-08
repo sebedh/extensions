@@ -110,6 +110,10 @@ steps:
         mv /rootfs/usr/local/share/locale "$containerRoot/usr/local/share/locale"
         mv /rootfs/usr/local/share/man "$containerRoot/usr/local/share/man"
         mv /rootfs/usr/local/include/bash "$containerRoot/usr/local/include"
+        mv /usr/lib/libncurses* "$containerRoot/usr/local/lib/"
+        mv /usr/lib/libcurses* "$containerRoot/usr/local/lib/"
+        mv /usr/include/ncurses* "$containerRoot/usr/local/include/"
+        mv /usr/include/curses* "$containerRoot/usr/local/include/"
         cp /rootfs/usr/local/bin/bash "$containerRoot/usr/local/bin/bash"
 
         rm -rf /rootfs/usr/local/bin
