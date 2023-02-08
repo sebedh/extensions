@@ -19,7 +19,7 @@ container:
         - ro
     # config via .machine.files
     - source: /var/etc/frr
-      destination: /etc/frr
+      destination: /usr/local/etc/frr
       type: bind
       options:
         - bind
