@@ -86,13 +86,18 @@ steps:
       - |
         tar -xzf bash.tar.gz --strip-component=1
         ./configure \
-           --libdir=/usr/local/lib \
-           --includedir=/usr/local/include \
-           --prefix=/usr/local \
-           --bindir=/usr/local/bin
+          --prefix=/usr/local \
+          --bindir=/usr/local/bin \
+          --libdir=/usr/local/lib \
+          --includedir=/usr/local/include \
+          --disable-nls \
+          --enable-readline \
+          --without-bash-malloc \
+          --with-installed-readline
+
     build:
       - |
-        make
+        make y.tab.c && make builtins/libbuiltins.a && make
     install:
       - |
         make install DESTDIR=/rootfs
@@ -102,7 +107,6 @@ steps:
         mv /rootfs/usr/local/lib/pkgconfig "$containerRoot/usr/local/lib/"
         mv /rootfs/usr/local/share/doc/bash "$containerRoot/usr/local/share/doc/"
         mv /rootfs/usr/local/share/info "$containerRoot/usr/local/share/info"
-        mv /rootfs/usr/local/share/locale "$containerRoot/usr/local/share/locale"
         mv /rootfs/usr/local/share/man "$containerRoot/usr/local/share/man"
         mv /rootfs/usr/local/include/bash "$containerRoot/usr/local/include"
         mv /usr/lib/libncurses* "$containerRoot/usr/local/lib/"
