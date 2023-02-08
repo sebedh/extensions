@@ -28,6 +28,8 @@ container:
       destination: /var/run/frr/
       type: bind
       options:
+        - uid=101
+        - gid=123
         - rshared
         - rbind
         - rw
