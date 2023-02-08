@@ -56,15 +56,15 @@ steps:
     install:
       - |
         containerRoot=/rootfs/usr/local/lib/containers/frr
-        mkdir -p "$containerRoot/etc/frr"
-        mkdir -p "$containerRoot/sbin"
         export DESTDIR="$containerRoot"
         make install
 
-        cp /pkg/files/* "$containerRoot/etc/frr"
-        mv "$containerRoot/etc/frr/docker-start" "$containerRoot/usr/lib/frr/docker-start"
-        chmod +x "$containerRoot/usr/lib/frr/docker-start"
-        mv "$containerRoot/etc/frr/tini" "$containerRoot/tini"
+        # docker start
+        cp /pkg/files/docker-start "$containerRoot/usr/local/lib/frr/"
+        chmod +x "$containerRoot/usr/local/lib/frr/docker-start"
+
+        # tini
+        cp /pkg/files/tini "$containerRoot/"
         chmod +x "$containerRoot/tini"
 finalize:
   - from: /rootfs

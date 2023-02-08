@@ -3,7 +3,7 @@ container:
   entrypoint: ./tini
   args:
     - --
-    - /usr/lib/frr/docker-start
+    - /usr/local/lib/frr/docker-start
   mounts:
     - source: /lib
       destination: /lib
