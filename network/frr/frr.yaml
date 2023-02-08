@@ -1,9 +1,9 @@
 name: frr
 container:
-  entrypoint: ./tini
+  entrypoint: /sbin/tini
   args:
-    - --
-    - /usr/local/lib/frr/docker-start
+    - "--"
+    - "/usr/local/lib/frr/docker-start"
   mounts:
     - source: /lib
       destination: /lib
@@ -26,8 +26,4 @@ container:
         - ro
 depends:
   - service: cri
-  - network:
-    - addresses
-    - connectivity
-    - etcfiles
 restart: always

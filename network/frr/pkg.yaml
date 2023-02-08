@@ -3,7 +3,7 @@ variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
   - stage: base
-  - image: ghcr.io/sebedh/alpine-builder:v0
+  - image: ghcr.io/sebedh/alpine-builder:v1
 steps:
   - sources: 
       - url: https://github.com/FRRouting/frr/archive/refs/tags/frr-{{ .FRR_VERSION }}.tar.gz
@@ -64,8 +64,13 @@ steps:
         chmod +x "$containerRoot/usr/local/lib/frr/docker-start"
 
         # tini
-        cp /pkg/files/tini "$containerRoot/"
-        chmod +x "$containerRoot/tini"
+        cp /sbin/tini "$containerRoot/sbin/"
+
+        # cleanup
+        rm -rf /rootfs/usr/local/bin
+        rm -rf /rootfs/usr/local/etc
+        rm -rf /rootfs/usr/local/lib/nut
+        rm -rf /rootfs/usr/local/sbin
 finalize:
   - from: /rootfs
     to: /rootfs
