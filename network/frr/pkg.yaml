@@ -23,10 +23,10 @@ steps:
         ./configure \
            --enable-user=root \
            --enable-group=root \
-           --prefix=/usr \
+           --prefix=/usr/local \
            --localstatedir=/var/run/frr \
-           --sbindir=/usr/lib/frr \
-           --sysconfdir=/etc/frr \
+           --sbindir=/usr/local/lib/frr \
+           --sysconfdir=/usr/local/etc/frr \
            --disable-doc \
            --disable-pimd \
            --disable-zebra \
