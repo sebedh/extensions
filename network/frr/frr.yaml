@@ -19,13 +19,6 @@ container:
       options:
         - bind
         - ro
-    - source: /var/run/frr/bpgd.pid
-      destination: /var/run/frr/bgpd.pid
-      type: bind
-      options:
-        - bind
-        - shared
-        - rw
     # config via .machine.files
     - source: /var/etc/frr
       destination: /usr/local/etc/frr
