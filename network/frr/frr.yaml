@@ -2,7 +2,6 @@ name: frr
 container:
   security:
     writableRootfs: true
-    readonlyPaths: []
   entrypoint: /sbin/tini
   args:
     - "--"
