@@ -72,7 +72,7 @@ steps:
         cp /pkg/files/passwd "$containerRoot/etc/"
         cp /bin/sh "$containerRoot/bin/"
         cp /bin/rm "$containerRoot/bin/"
-        cp /bin/usr/bin/dirname "$containerRoot/usr/bin/"
+        cp /usr/bin/dirname "$containerRoot/usr/bin/"
 
         # path
         frrPath="$containerRoot/usr/local/lib/frr"
@@ -83,6 +83,7 @@ steps:
 
         mkdir -p "$containerRoot/var/tmp/frr"
         mkdir -p "$containerRoot/var/run/frr"
+        touch "$continerRoot/var/run/frr/{staticd,bgpd,zebra}.pid"
         chown -R 101:123 "$containerRoot/var/tmp/frr"
         chown -R 101:123 "$containerRoot/var/run/frr"
   - sources:
