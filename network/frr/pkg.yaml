@@ -3,7 +3,7 @@ variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
   - stage: base
-  - image: ghcr.io/sebedh/alpine-builder:v1
+  - image: ghcr.io/sebedh/alpine-builder:frr
 steps:
   - sources: 
       - url: https://github.com/FRRouting/frr/archive/refs/tags/frr-{{ .FRR_VERSION }}.tar.gz
@@ -25,7 +25,7 @@ steps:
            --enable-group=frr \
            --prefix=/usr/local \
            --sysconfdir=/usr/local/etc/frr \
-           --localstatedir=/var/run/frr \
+           --localstatedir=/usr/local/var/run \
            --sbindir=/usr/local/lib/frr \
            --with-yangmodelsdir=/usr/local/share/yang \
            --disable-doc \
@@ -78,11 +78,6 @@ steps:
         sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/watchfrr.sh"
         sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/frr"
 
-        mkdir -p "$containerRoot/var/tmp/frr"
-        mkdir -p "$containerRoot/var/run/frr"
-        touch "$containerRoot/var/run/frr/bpgd.pid"
-        chown -R 101:123 "$containerRoot/var/tmp/frr"
-        chown -R 101:123 "$containerRoot/var/run/frr"
   - sources:
       - url: https://github.com/bminor/bash/archive/refs/tags/bash-5.1.tar.gz
         destination: bash.tar.gz
