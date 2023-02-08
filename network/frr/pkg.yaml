@@ -79,7 +79,7 @@ steps:
         sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/frr"
 
         mkdir -p "$containerRoot/var/tmp/frr"
-        mkdir -p "$containerRoot/var/run/frr"
+        touch "$containerRoot/var/run/frr/bpgd.pid"
         chown -R 101:123 "$containerRoot/var/tmp/frr"
         chown -R 101:123 "$containerRoot/var/run/frr"
   - sources:
