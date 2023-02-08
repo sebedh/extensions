@@ -24,8 +24,22 @@ container:
       options:
         - bind
         - ro
-    - source: /var/run/frr
-      destination: /var/run/frr
+    - source: /var/run/frr/staticd.pid
+      destination: /var/run/frr/staticd.pid
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /var/run/frr/bgpd.pid
+      destination: /var/run/frr/bdpd.pid
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /var/run/frr/zebra.pid
+      destination: /var/run/frr/zebra.pid
       type: bind
       options:
         - rshared
