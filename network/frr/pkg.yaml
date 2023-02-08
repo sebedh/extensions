@@ -70,7 +70,6 @@ steps:
         cp /sbin/tini "$containerRoot/sbin/"
         cp /pkg/files/docker-start "$containerRoot/"
 
-        
         # cleanup
         rm -rf /rootfs/usr/local/bin
         rm -rf /rootfs/usr/local/etc
