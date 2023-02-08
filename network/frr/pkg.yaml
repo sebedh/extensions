@@ -70,7 +70,9 @@ steps:
         cp /pkg/files/docker-start "$containerRoot/"
         cp /pkg/files/group "$containerRoot/etc/"
         cp /pkg/files/passwd "$containerRoot/etc/"
-        cp /bin/sh "$containerRoot/bin/sh"
+        cp /bin/sh "$containerRoot/bin/"
+        cp /bin/rm "$containerRoot/bin/"
+        cp /bin/usr/bin/dirname "$containerRoot/usr/bin/"
 
         # path
         frrPath="$containerRoot/usr/local/lib/frr"
