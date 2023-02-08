@@ -1,7 +1,5 @@
 name: frr
 container:
-  security:
-    writableRootfs: true
   entrypoint: /sbin/tini
   args:
     - "--"
@@ -26,6 +24,20 @@ container:
       options:
         - bind
         - ro
+    - source: /var/run/frr
+      destination: /var/run/frr
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /var/tmp/frr
+      destination: /var/tmp/frr
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
 depends:
   - service: cri
 restart: always
