@@ -76,7 +76,6 @@ steps:
         sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/frrinit.sh"
         sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/watchfrr.sh"
         sed -i "s#/bin/bash#/usr/local/bin/bash#g" "$frrPath/frr"
-
   - sources:
       - url: https://github.com/bminor/bash/archive/refs/tags/bash-5.1.tar.gz
         destination: bash.tar.gz
@@ -112,10 +111,15 @@ steps:
         mv /usr/lib/libcurses* "$containerRoot/usr/local/lib/"
         mv /usr/lib/libreadline* "$containerRoot/usr/local/lib/"
         mv /usr/lib/libhistory* "$containerRoot/usr/local/lib/"
+        mv /usr/lib/libyang* "$containerRoot/usr/local/lib/"
+        mv /usr/lib/libcap* "$containerRoot/usr/local/lib/"
         mv /usr/include/ncurses* "$containerRoot/usr/local/include/"
         mv /usr/include/curses* "$containerRoot/usr/local/include/"
         mv /usr/include/readline "$containerRoot/usr/local/include/"
         cp /rootfs/usr/local/bin/bash "$containerRoot/usr/local/bin/bash"
+
+        mkdir "$containerRoot/usr/bin"
+        cp /usr/bin/install "$containerRoot/usr/bin/"
 
         rm -rf /rootfs/usr/local/bin
         rm -rf /rootfs/usr/local/etc
