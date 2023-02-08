@@ -3,16 +3,10 @@ container:
   entrypoint: /sbin/tini
   args:
     - "--"
-    - "/usr/local/lib/frr/bgpd"
+    - "/docker-start"
   mounts:
     - source: /lib
       destination: /lib
-      type: bind
-      options:
-        - bind
-        - ro
-    - source: /usr/lib
-      destination: /usr/lib
       type: bind
       options:
         - bind
