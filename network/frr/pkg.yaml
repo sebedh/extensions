@@ -21,8 +21,8 @@ steps:
         export PKG_CONFIG_PATH="/usr/lib/pkgconfig"
         ./bootstrap.sh
         ./configure \
-           --enable-user=root \
-           --enable-group=root \
+           --enable-user=frr \
+           --enable-group=frr \
            --prefix=/usr/local \
            --sysconfdir=/usr/local/etc/frr \
            --localstatedir=/var/run/frr \
@@ -69,6 +69,8 @@ steps:
         # tini docker-start
         cp /sbin/tini "$containerRoot/sbin/"
         cp /pkg/files/docker-start "$containerRoot/"
+        cp /pkg/files/group "$containerRoot/etc/"
+        cp /pkg/files/passwd "$containerRoot/etc/"
 
         # path
         frrPath="$containerRoot/usr/local/lib/frr"
@@ -113,6 +115,7 @@ steps:
         mv /usr/lib/libhistory* "$containerRoot/usr/local/lib/"
         mv /usr/lib/libyang* "$containerRoot/usr/local/lib/"
         mv /usr/lib/libcap* "$containerRoot/usr/local/lib/"
+        mv /usr/lib/libpcre* "$containerRoot/usr/local/lib/"
         mv /usr/include/ncurses* "$containerRoot/usr/local/include/"
         mv /usr/include/curses* "$containerRoot/usr/local/include/"
         mv /usr/include/readline "$containerRoot/usr/local/include/"
