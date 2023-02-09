@@ -70,9 +70,7 @@ steps:
         mv /rootfs/usr/local/share "$containerRoot/usr/local/"
         mv /rootfs/usr/local/include "$containerRoot/usr/local/"
 
-        # tini docker-start
-        cp /sbin/tini "$containerRoot/sbin/"
-        cp /pkg/files/docker-start "$containerRoot/"
+        # docker-start
         cp /pkg/files/group "$containerRoot/etc/"
         cp /pkg/files/passwd "$containerRoot/etc/"
 

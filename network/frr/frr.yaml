@@ -2,10 +2,7 @@ name: frr
 container:
   security:
     writableRootfs: true
-  entrypoint: /sbin/tini
-  args:
-    - "--"
-    - "/usr/local/lib/frr/bgpd"
+  entrypoint: "/usr/local/lib/frr/bgpd"
   mounts:
     - source: /lib
       destination: /lib
