@@ -21,8 +21,8 @@ container:
       options:
         - bind
         - ro
-    - source: /var/run
-      destination: /usr/local/var/run
+    - source: /var/run/frr
+      destination: /var/run/frr
       type: bind
       options:
         - rshared

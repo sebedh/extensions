@@ -23,7 +23,7 @@ steps:
         ./configure \
            --prefix=/usr/local \
            --sysconfdir=/usr/local/etc/frr \
-           --localstatedir=/usr/local/var/run \
+           --localstatedir=/var/run/frr \
            --sbindir=/usr/local/lib/frr \
            --with-yangmodelsdir=/usr/local/share/yang \
            --disable-doc \
@@ -63,8 +63,8 @@ steps:
         mkdir -p "$containerRoot/usr/local/lib"
         mkdir -p "$containerRoot/usr/local/bin"
         mkdir -p "$containerRoot/usr/local/share"
-        mkdir -p "$containerRoot/usr/local/var/run"
         mkdir -p "$containerRoot/usr/local/tmp"
+        mkdir -p "$containerRoot/var/run/frr"
         mv /rootfs/usr/local/lib/lib* "$containerRoot/usr/local/lib/"
         mv /rootfs/usr/local/lib/frr "$containerRoot/usr/local/lib/"
         mv /rootfs/usr/local/share "$containerRoot/usr/local/"
