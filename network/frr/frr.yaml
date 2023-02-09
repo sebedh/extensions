@@ -27,6 +27,13 @@ container:
         - rshared
         - rbind
         - rw
+    - source: /var/tmp/frr
+      destination: /var/tmp/frr
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
     # config via .machine.files
     - source: /var/etc/frr
       destination: /usr/local/etc/frr
