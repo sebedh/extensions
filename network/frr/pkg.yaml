@@ -135,8 +135,7 @@ steps:
         cp /bin/sh "$containerRoot/bin/"
         cp /bin/rm "$containerRoot/bin/"
 
-        chown -r 123:132 "$containerRoot/usr/local/var/run"
-
+        # chown -R 123:132 "$containerRoot/usr/local/var/run"
         rm -rf /rootfs/usr/local/bin
         rm -rf /rootfs/usr/local/etc
         rm -rf /rootfs/usr/local/lib/frr
