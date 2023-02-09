@@ -1,8 +1,10 @@
 name: frr
 container:
-  security:
-    writableRootfs: true
   entrypoint: "/usr/local/lib/frr/bgpd"
+  args:
+    - --log stdout 
+    - --log-level info 
+    - --no_zebra
   mounts:
     - source: /lib
       destination: /lib
