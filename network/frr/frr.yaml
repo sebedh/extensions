@@ -6,8 +6,8 @@ container:
     - "--log-level=info"
     - "--no_zebra"
     - "--bgp_port=2605"
-    - "-u frr"
-    - "-g frr"
+    - "--user=frr"
+    - "--group=frr"
   mounts:
     - source: /lib
       destination: /lib
