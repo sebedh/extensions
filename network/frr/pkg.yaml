@@ -72,6 +72,8 @@ steps:
         mv /rootfs/usr/local/share "$containerRoot/usr/local/"
         mv /rootfs/usr/local/include "$containerRoot/usr/local/"
 
+        chown -R 123:132 "$containerRoot/usr/local/var/run"
+
         # tini docker-start
         cp /sbin/tini "$containerRoot/sbin/"
         cp /pkg/files/docker-start "$containerRoot/"
@@ -135,7 +137,6 @@ steps:
         cp /bin/sh "$containerRoot/bin/"
         cp /bin/rm "$containerRoot/bin/"
 
-        # chown -R 123:132 "$containerRoot/usr/local/var/run"
         rm -rf /rootfs/usr/local/bin
         rm -rf /rootfs/usr/local/etc
         rm -rf /rootfs/usr/local/lib/frr
