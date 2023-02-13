@@ -7,4 +7,4 @@ metadata:
     bird
   compatibility:
     talos:
-      version: ">= v1.3.0"
+      version: ">= v1.3.2"

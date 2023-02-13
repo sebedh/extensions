@@ -5,7 +5,7 @@ dependencies:
   - stage: base
   - image: ghcr.io/sebedh/alpine-builder:bird
 steps:
-  - sources: 
+  - sources:
       - url: https://bird.network.cz/download/bird-2.0.12.tar.gz
         destination: bird.tar.gz
         sha256: 3ec462a237d06d1f4455d6ec00a42f0b1686061fc988e5c89a841d01dd753b53
