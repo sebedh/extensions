@@ -1,5 +1,5 @@
 REGISTRY ?= ghcr.io
-USERNAME ?= siderolabs
+USERNAME ?= sebedh
 SHA ?= $(shell git describe --match=none --always --abbrev=8 --dirty)
 TAG ?= $(shell git describe --tag --always --dirty)
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
@@ -20,7 +20,7 @@ endif
 BLDR_RELEASE ?= v0.2.0-alpha.10
 
 BUILD := docker buildx build
-PLATFORM ?= linux/amd64,linux/arm64
+PLATFORM ?= linux/amd64
 PROGRESS ?= auto
 PUSH ?= false
 COMMON_ARGS := --file=Pkgfile
@@ -39,6 +39,7 @@ space = $(empty) $(empty)
 TARGETS = \
 		amd-ucode \
 		bnx2-bnx2x \
+		bird \
 		gasket-driver \
 		gvisor \
 		hello-world-service \

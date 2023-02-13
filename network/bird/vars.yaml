@@ -1,0 +1,1 @@
+VERSION: "{{ .BIRD_VERSION }}-{{ .BUILD_ARG_TAG }}"

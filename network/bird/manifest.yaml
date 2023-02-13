@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: bird
+  version: "$VERSION"
+  author: Sebastian Edholm
+  description: |
+    bird
+  compatibility:
+    talos:
+      version: ">= v1.3.0"

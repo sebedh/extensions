@@ -1,0 +1,37 @@
+name: bird
+container:
+  entrypoint: /bird
+  args:
+    - "-u 123"
+    - "-g 131"
+    - "-f"
+  mounts:
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /var/run
+      destination: /usr/local/var/run
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # config via .machine.files
+    - source: /var/etc
+      destination: /usr/local/etc/
+      type: bind
+      options:
+        - bind
+        - ro
+depends:
+  - service: cri
+restart: always

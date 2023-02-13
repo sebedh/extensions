@@ -1,0 +1,49 @@
+name: bird
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - image: ghcr.io/sebedh/alpine-builder:bird
+steps:
+  - sources: 
+      - url: https://bird.network.cz/download/bird-2.0.12.tar.gz
+        destination: bird.tar.gz
+        sha256: 3ec462a237d06d1f4455d6ec00a42f0b1686061fc988e5c89a841d01dd753b53
+        sha512: b5e1235210e500511955c009456710dd12d6ea747825806a6d35a9de5f2f984d9a45fa541d45dd5e353f87f4d61bf1d4612cb6058769e905e4ef6b414ab4212f
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+
+      - |
+        tar -xzf bird.tar.gz --strip-component=1
+        rm bird.tar.gz
+      - |
+        ./configure \
+          --with-protocols=bgp \
+          --disable-client
+    build:
+      - |
+        make -j $(nproc)
+
+    install:
+      - |
+        make install DESTDIR=/rootfs
+
+        containerRoot=/rootfs/usr/local/lib/containers/bird
+        mkdir -p "$containerRoot/etc"
+        mkdir -p "$containerRoot/usr/local/var/run"
+        cp /rootfs/usr/local/sbin/bird "$containerRoot/bird"
+        cp /rootfs/usr/local/sbin/birdcl "$containerRoot/birdcl"
+        cp /pkg/files/* "$containerRoot/etc/"
+
+        rm -rf /rootfs/usr/local/sbin
+        rm -rf /rootfs/usr/local/etc
+        rm -rf /rootfs/usr/local/var
+
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/bird.yaml
+    to: /rootfs/usr/local/etc/containers/bird.yaml
